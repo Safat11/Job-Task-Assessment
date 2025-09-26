@@ -5,7 +5,7 @@ Features:
 - Request location permission and show selected location
 - Add alarms using Date & Time picker
 - Local notifications (flutter_local_notifications + timezone)
-- Persistent storage using Hive
+- Persistent storage
 
 Quick run:
 1. `flutter pub get`
