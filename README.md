@@ -5,13 +5,11 @@ Features:
 - Request location permission and show selected location
 - Add alarms using Date & Time picker
 - Local notifications (flutter_local_notifications + timezone)
-- Persistent storage
+- Store the alarms in a local database 
 
 Quick run:
 1. `flutter pub get`
-2. (Optional) If you want to regenerate adapters: `flutter pub run build_runner build`
-   *Note: The generated Hive adapter `alarm.g.dart` is already provided in this package so build_runner is not required to run the demo.*
-3. `flutter run`
+2. `flutter run`
 
 Notes:
 - Add required permission entries in AndroidManifest and Info.plist (see earlier messages).
