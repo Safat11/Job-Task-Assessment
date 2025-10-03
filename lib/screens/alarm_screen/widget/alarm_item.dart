@@ -18,26 +18,28 @@ class AlarmItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(32, 26, 67, 1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(100),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                time,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              time,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(height: 4),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            children: [
               Text(
                 date,
                 style: TextStyle(
@@ -45,18 +47,18 @@ class AlarmItem extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
+              Transform.scale(
+                scale: 0.8,
+                child: Switch(
+                  value: alarm.active,
+                  onChanged: onToggle,
+                  activeColor: Colors.white,
+                  activeTrackColor: const Color.fromRGBO(82, 0, 255, 1),
+                  inactiveThumbColor: Colors.black,
+                  inactiveTrackColor: Colors.white,
+                ),
+              ),
             ],
-          ),
-          Transform.scale(
-            scale: 0.8,
-            child: Switch(
-              value: alarm.active,
-              onChanged: onToggle,
-              activeColor: Colors.white,
-              activeTrackColor: const Color.fromRGBO(82, 0, 255, 1),
-              inactiveThumbColor: Colors.black,
-              inactiveTrackColor: Colors.white,
-            ),
           ),
         ],
       ),

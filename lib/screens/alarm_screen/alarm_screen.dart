@@ -1,7 +1,8 @@
+import 'package:alarm_task/screens/alarm_screen/widget/alarm_item.dart';
+import 'package:alarm_task/screens/alarm_screen/widget/location_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/screens/alarm_screen/widget/alarm_item.dart';
-import 'package:task/screens/alarm_screen/widget/location_card.dart';
+
 import '../add_alarm_screen/add_alarm_screen.dart';
 import 'controller/alarm_controller.dart';
 
@@ -44,9 +45,10 @@ class AlarmScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Obx(() => LocationCard(
-                  locationText:
-                  controller.formatLocation(controller.position.value),
+                  labelText: 'Your Area',
+                  locationText: controller.formatLocation(controller.position.value),
                 )),
+
                 const SizedBox(height: 40),
                 const Text(
                   'Alarms',
@@ -60,11 +62,11 @@ class AlarmScreen extends StatelessWidget {
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () async {
-                      controller.loadAlarms(); // reload alarms from storage
+                      controller.loadAlarms();
                     },
                     child: Obx(() => ListView.separated(
                       physics:
-                      const AlwaysScrollableScrollPhysics(), // needed for RefreshIndicator
+                      const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.alarms.length,
                       separatorBuilder: (_, __) =>
                       const SizedBox(height: 15),
@@ -74,9 +76,8 @@ class AlarmScreen extends StatelessWidget {
                           alarm: alarm,
                           time: controller.formatTime(alarm.dateTime),
                           date: controller.formatDate(alarm.dateTime),
-                          onToggle: (value) {
-                            controller.alarms[index].active = value;
-                            controller.alarms.refresh();
+                          onToggle: (value) async {
+                            await controller.toggleAlarm(index, value);
                           },
                         );
                       },
@@ -102,4 +103,3 @@ class AlarmScreen extends StatelessWidget {
     );
   }
 }
-

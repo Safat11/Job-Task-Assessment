@@ -1,19 +1,18 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-    namespace = "com.example.task"
+    namespace = "com.example.alarm_task"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"   // ✅ fixed
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        isCoreLibraryDesugaringEnabled = true  // ✅ already added
+        isCoreLibraryDesugaringEnabled = true  // ✅ এটাই সঠিক syntax
     }
 
     kotlinOptions {
@@ -21,8 +20,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.task"
-        minSdk = flutter.minSdkVersion
+        applicationId = "com.example.alarm_task"
+        minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -40,6 +39,5 @@ flutter {
 }
 
 dependencies {
-    // ✅ required for flutter_local_notifications
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

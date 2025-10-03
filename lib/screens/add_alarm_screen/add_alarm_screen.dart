@@ -1,7 +1,8 @@
+import 'package:alarm_task/screens/add_alarm_screen/widget/alarm_time_picker.dart';
+import 'package:alarm_task/screens/add_alarm_screen/widget/alarm_title_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/screens/add_alarm_screen/widget/alarm_time_picker.dart';
-import 'package:task/screens/add_alarm_screen/widget/alarm_title_field.dart';
+
 import 'controller/add_alarm_controller.dart';
 
 class AddAlarmScreen extends StatelessWidget {

@@ -9,25 +9,39 @@ class NotificationService {
     // init timezone package
     tz.initializeTimeZones();
     // set local location (tz.local will default to system)
-    final locations = tz.timeZoneDatabase.locations;
-    tz.setLocalLocation(tz.getLocation(tz.local.name));
+    tz.setLocalLocation(tz.getLocation('Asia/Dhaka')); // Bangladesh er timezone
 
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    final ios = DarwinInitializationSettings();
-    final initSettings = InitializationSettings(android: android, iOS: ios);
+    const ios = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+    const initSettings = InitializationSettings(android: android, iOS: ios);
 
-    await _plugin.initialize(initSettings, onDidReceiveNotificationResponse: (response) async {
-      // handle notification tap
-    });
+    await _plugin.initialize(
+        initSettings,
+        onDidReceiveNotificationResponse: (response) async {
+          // handle notification tap
+        }
+    );
+
+    // Request notification permission for Android 13+
+    await _plugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
 
     // create a default channel for Android
     const androidChannel = AndroidNotificationChannel(
       'alarm_channel',
       'Alarms',
       description: 'Channel for alarm notifications',
-      importance: Importance.high,
+      importance: Importance.max,
+      playSound: true,
+      enableVibration: true,
     );
-    await _plugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+    await _plugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(androidChannel);
   }
 
@@ -40,9 +54,16 @@ class NotificationService {
       id,
       title,
       body,
-      NotificationDetails(
-        android: AndroidNotificationDetails('alarm_channel', 'Alarms',
-            channelDescription: 'Alarm notifications', importance: Importance.max, priority: Priority.high),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'alarm_channel',
+          'Alarms',
+          channelDescription: 'Alarm notifications',
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          enableVibration: true,
+        ),
         iOS: DarwinNotificationDetails(),
       ),
     );
@@ -61,17 +82,28 @@ class NotificationService {
       title,
       body,
       tzDate,
-      NotificationDetails(
-        android: AndroidNotificationDetails('alarm_channel', 'Alarms',
-            channelDescription: 'Alarm notifications', importance: Importance.max, priority: Priority.high),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'alarm_channel',
+          'Alarms',
+          channelDescription: 'Alarm notifications',
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          enableVibration: true,
+        ),
         iOS: DarwinNotificationDetails(),
       ),
-      androidAllowWhileIdle: true,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, // ei line important!
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
   static Future<void> cancelNotification(int id) async {
     await _plugin.cancel(id);
+  }
+
+  static Future<void> cancelAll() async {
+    await _plugin.cancelAll();
   }
 }

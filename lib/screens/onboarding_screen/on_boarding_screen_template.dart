@@ -1,6 +1,6 @@
+import 'package:alarm_task/screens/onboarding_screen/widget/onboarding_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/screens/onboarding_screen/widget/onboarding_widgets.dart';
 import '../../constants/app_color.dart';
 import '../../widgets/common_button_widget.dart';
 import 'controller/onboarding_controller.dart';

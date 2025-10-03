@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class LocationCard extends StatelessWidget {
   final String locationText;
+  final String labelText; // dynamic label
 
-  const LocationCard({super.key, required this.locationText});
+  const LocationCard({
+    super.key,
+    required this.locationText,
+    this.labelText = '', // default fallback
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class LocationCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Add your location',
+                labelText.isNotEmpty ? labelText : 'Add your location',
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.7),
                   fontSize: 16,

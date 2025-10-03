@@ -1,7 +1,7 @@
+import 'package:alarm_task/screens/home_screen/widget/custom_button.dart';
+import 'package:alarm_task/screens/home_screen/widget/location_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task/screens/home_screen/widget/custom_button.dart';
-import 'package:task/screens/home_screen/widget/location_display.dart';
 import '../../constants/image_path.dart';
 import '../alarm_screen/alarm_screen.dart';
 import 'controller/home_screen_controller.dart';
