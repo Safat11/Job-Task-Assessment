@@ -79,7 +79,7 @@ flutter run
 
 ## 6. Demo Video
 
-Watch the app in action: [Loom Video Link]([YOUR_LOOM_VIDEO_LINK](https://www.loom.com/share/d153a5842e7c4726a3d7e725e0412603)
+Watch the app in action: ([LOOM_VIDEO_LINK](https://www.loom.com/share/d153a5842e7c4726a3d7e725e0412603)
 
 ---
 
